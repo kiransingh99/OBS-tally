@@ -55,6 +55,10 @@ Light.
 
 Then you can use OBS as normal.
 
+## Roadmap
+* Allow defining of callbacks for when stream, recording, and both are active
+* Remove debug statements
+
 ## Support
 Get in contact if you have any problems with setting this up! I'm not actively
 monitoring this for changes in dependencies, so if something stops working, I
