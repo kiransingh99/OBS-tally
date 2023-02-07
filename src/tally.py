@@ -1,5 +1,5 @@
 import enum
-import obspython
+import obspython #pyright: ignore [reportMissingImports]
 import serial
 
 class _Events(enum.IntEnum):
