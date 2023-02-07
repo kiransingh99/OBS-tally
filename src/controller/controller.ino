@@ -3,10 +3,10 @@ const int STREAM_LED = 13;
 const int RECORD_LED = 13;
 // --- END EDITABLE PARAMETERS---
 
-#define Events.NONE `0`
-#define Events.STREAMING `1`
-#define Events.RECORDING `2`
-#define Events.STREAMING_AND_RECORDING `3`
+#define NONE '0'
+#define STREAMING '1'
+#define RECORDING '2'
+#define STREAMING_AND_RECORDING '3'
 
 long int last_message = 0;
 
@@ -18,16 +18,16 @@ void setup() {
 void loop() {
   if (Serial.available()) {
     char state = Serial.read();
-    if (state == '0') {
+    if (state == NONE) {
       digitalWrite(STREAM_LED, LOW);
       digitalWrite(RECORD_LED, LOW);
-    } else if (state == '1') {
+    } else if (state == STREAMING) {
       digitalWrite(RECORD_LED, LOW);
       digitalWrite(STREAM_LED, HIGH);
-    } else if (state == '2') {
+    } else if (state == RECORDING) {
       digitalWrite(STREAM_LED, LOW);
       digitalWrite(RECORD_LED, HIGH);
-    } else if (state == '3') {
+    } else if (state == STREAMING_AND_RECORDING) {
       digitalWrite(STREAM_LED, HIGH);
       digitalWrite(RECORD_LED, HIGH);
     }
