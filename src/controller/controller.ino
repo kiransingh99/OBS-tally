@@ -1,6 +1,7 @@
 // --- START EDITATBLE PARAMETERS ---
 const int STREAM_LED = 13;
 const int RECORD_LED = 13;
+const int TIMEOUT = 5000 // if no message is received in TIMEOUT milliseconds, turn off light(s)
 // --- END EDITABLE PARAMETERS---
 
 #define NONE '0'
@@ -33,7 +34,7 @@ void loop() {
     }
     last_message = millis();
   } else {
-    if (millis() - last_message > 5000) {
+    if (millis() - last_message > TIMEOUT) {
       digitalWrite(STREAM_LED, LOW);
       digitalWrite(RECORD_LED, LOW);
     }
