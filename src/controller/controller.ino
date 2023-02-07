@@ -1,24 +1,34 @@
-#include <LiquidCrystal.h> // includes the LiquidCrystal Library 
-LiquidCrystal lcd(1, 2, 4, 5, 6, 7); // Creates an LCD object. Parameters: (rs, enable, d4, d5, d6, d7) 
+// --- START EDITATBLE PARAMETERS ---
+const int STREAM_LED = 13;
+const int RECORD_LED = 13;
+// --- END EDITABLE PARAMETERS---
 
-void setup() { 
-  lcd.begin(16,2); // Initializes the interface to the LCD screen, and specifies the dimensions (width and height) of the display }
-  pinMode(LED_BUILTIN, OUTPUT);
+#define Events.NONE `0`
+#define Events.STREAMING `1`
+#define Events.RECORDING `2`
+#define Events.STREAMING_AND_RECORDING `3`
+
+void setup() {
   Serial.begin(9600);
-  lcd.clear();
+  pinMode(LED_BUILTIN, OUTPUT);
   delay(1000);
 }
 
 void loop() {
   if (Serial.available()) {
     char state = Serial.read();
-    lcd.print(state);
-    if (state == '1' || state == '2' || state == '3') {
-      digitalWrite(LED_BUILTIN, HIGH);
-    } else if (state == '0') {
-      digitalWrite(LED_BUILTIN, LOW);
-    } else {
-      lcd.write(state);
+    if (state == '0') {
+      digitalWrite(STREAM_LED, LOW);
+      digitalWrite(RECORD_LED, LOW);
+    } else if (state == '1') {
+      digitalWrite(STREAM_LED, HIGH);
+      digitalWrite(RECORD_LED, LOW);
+    } else if (state == '2') {
+      digitalWrite(STREAM_LED, LOW);
+      digitalWrite(RECORD_LED, HIGH);
+    } else if (state == '3') {
+      digitalWrite(STREAM_LED, HIGH);
+      digitalWrite(RECORD_LED, HIGH);
     }
   }
 }
