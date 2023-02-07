@@ -1,7 +1,7 @@
 // --- START EDITATBLE PARAMETERS ---
 const int STREAM_LED = 13;
 const int RECORD_LED = 13;
-const int TIMEOUT = 5000 // if no message is received in TIMEOUT milliseconds, turn off light(s)
+const int TIMEOUT = 5000; // if no message is received in TIMEOUT milliseconds, turn off light(s)
 // --- END EDITABLE PARAMETERS---
 
 #define NONE '0'
