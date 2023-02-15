@@ -1,6 +1,6 @@
 // --- START EDITATBLE PARAMETERS ---
-const int STREAM_LED = 13;
-const int RECORD_LED = 13;
+const int STREAM_LED = 12;
+const int RECORD_LED = 12;
 const int TIMEOUT = 5000; // if no message is received in TIMEOUT milliseconds, turn off light(s)
 // --- END EDITABLE PARAMETERS---
 
@@ -20,23 +20,23 @@ void loop() {
   if (Serial.available()) {
     char state = Serial.read();
     if (state == NONE) {
-      digitalWrite(STREAM_LED, LOW);
-      digitalWrite(RECORD_LED, LOW);
+      digitalWrite(STREAM_LED, HIGH);
+      digitalWrite(RECORD_LED, HIGH);
     } else if (state == STREAMING) {
-      digitalWrite(RECORD_LED, LOW);
-      digitalWrite(STREAM_LED, HIGH);
-    } else if (state == RECORDING) {
+      digitalWrite(RECORD_LED, HIGH);
       digitalWrite(STREAM_LED, LOW);
-      digitalWrite(RECORD_LED, HIGH);
-    } else if (state == STREAMING_AND_RECORDING) {
+    } else if (state == RECORDING) {
       digitalWrite(STREAM_LED, HIGH);
-      digitalWrite(RECORD_LED, HIGH);
+      digitalWrite(RECORD_LED, LOW);
+    } else if (state == STREAMING_AND_RECORDING) {
+      digitalWrite(STREAM_LED, LOW);
+      digitalWrite(RECORD_LED, LOW);
     }
     last_message = millis();
   } else {
     if (millis() - last_message > TIMEOUT) {
-      digitalWrite(STREAM_LED, LOW);
-      digitalWrite(RECORD_LED, LOW);
+      digitalWrite(STREAM_LED, HIGH);
+      digitalWrite(RECORD_LED, HIGH);
     }
   }
 }
